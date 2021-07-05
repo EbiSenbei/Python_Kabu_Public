@@ -4,7 +4,7 @@ import datetime
 import os
 import fix_yahoo_finance as yf
 
-
+# float型への変換チェック
 def isfloat(obj: any):
     if not obj.isdecimal():
         try:
@@ -15,11 +15,10 @@ def isfloat(obj: any):
     else:
         return True
 
-
 if __name__ == '__main__':
     # try:
     print("/*--START-----------------------------------------------------*/")
-
+    print("/*--米国株の株価取得プログラム*/")
     # 初期値の設定
     symbolCode: str = "0000"
     start = datetime.datetime(2010, 1, 1)  # 取得したい開始期間
@@ -27,7 +26,8 @@ if __name__ == '__main__':
 
     # 米国株の銘柄コード(ティッカーシンボル)一覧をナスダックより取得
     symbolsDf: pd.core.frame.DataFrame
-    symbolsDf = get_nasdaq_symbols()
+    symbolsDf = get_nasdaq_symbols()              # 米国全銘柄を取得したい場合はこちら
+    # symbolsDf = pd.DataFrame(index=["VTI","VOO"])   # 銘柄指定で取得したい場合はこちら
     # symbolsDf.to_csv('nasdaq_symbols.csv')    # 銘柄一覧をCSVファイルで出力
 
     # データ出力フォルダを作成
@@ -54,7 +54,6 @@ if __name__ == '__main__':
             print(strBuf)
 
             # 日別株価を取得
-
             try:
                 df = yf.download(symbolCode, start=start, end=end)
             except ValueError as err:
@@ -116,15 +115,6 @@ if __name__ == '__main__':
                     # 対象日付をセット
                     dateTARGET_DT = datetime.datetime.strptime(str(df.index[i]), '%Y-%m-%d 00:00:00')
 
-                    # strBRAND_CD = ""
-                    # fltOPEN_PRICE = 0.00  # 始値
-                    # fltHIGH_PRICE = 0.00  # 高値
-                    # fltLOW_PRICE  = 0.00  # 安値
-                    # fltCLOSE_PRICE= 0.00  # 終値
-                    # # fltADJ_CLOSE_PRICE = 0.00  # 終値調整
-                    # # fltADJ_CLOSE_PRICE_before = 0.00  # 終値調整(前日)
-                    # fltVOLUME_SU = 0.00  # 売買高
-
                     # 取得した値をDataframeにセット
                     outputDf = outputDf.append({
                         '銘柄': strBRAND_CD
@@ -149,11 +139,10 @@ if __name__ == '__main__':
                     print("Error:" + str(err))
                     break
 
-        # # システム日付を取得
-        # sysDateTime: str = datetime.datetime.now().strftime('%Y_%m%d')
-
         # 取得した株価データをExcelデータに出力
         if "outputDf" in globals():
-            outputDf.to_csv("data/StockData_" + strBRAND_CD + ".csv",encoding="utf_8_sig")
+            if len(outputDf) > 0:
+                outputDf.to_csv("data/StockData_" + strBRAND_CD + ".csv",encoding="utf_8_sig")
+                outputDf = outputDf.drop(outputDf.index[0:])
 
     print("/*--FINISH-----------------------------------------------------*/")

@@ -2,7 +2,8 @@ import pandas as pd
 from pandas_datareader.nasdaq_trader import get_nasdaq_symbols
 import datetime
 import os
-import fix_yahoo_finance as yf
+# import fix_yahoo_finance as yf
+import yfinance as yf
 
 # float型への変換チェック
 def isfloat(obj: any):

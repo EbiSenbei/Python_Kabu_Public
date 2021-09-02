@@ -1,0 +1,96 @@
+#サーバ名: "EBI-PC" 
+#データベース名: "TGP_KABU" 
+#スクリプトを実行します。 
+IF OBJECT_ID(N'LJ_DIVIDEND', N'U') IS NOT NULL 
+DROP TABLE LJ_DIVIDEND
+GO 
+
+CREATE TABLE [dbo].[LJ_DIVIDEND]
+(
+    [UP_DT]                        [datetime] NOT NULL,
+    [MAKE_DT]                      [datetime] NOT NULL,
+    [SHORI_KBN]                    [nvarchar](5) NOT NULL,
+    [BRAND_CD]                     [nvarchar](256) NOT NULL,
+    [ANNU_DT]                      [datetime] NOT NULL,
+    [EX_RIGHTS_DT]                 [datetime] NOT NULL,
+    [PAY_DT]                       [datetime] NOT NULL,
+    [DIV_TXT]                      [nvarchar](1024),
+    [DIV_PRICE]                    [float],
+    CONSTRAINT [PK_LJ_DIVIDEND] PRIMARY KEY CLUSTERED 
+(
+       UP_DT ASC, 
+       MAKE_DT ASC, 
+       SHORI_KBN ASC, 
+       BRAND_CD ASC, 
+       ANNU_DT ASC, 
+       EX_RIGHTS_DT ASC, 
+       PAY_DT ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] 
+GO 
+
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'更新日時' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'LJ_DIVIDEND', @level2type=N'COLUMN',@level2name=N'UP_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'登録日時' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'LJ_DIVIDEND', @level2type=N'COLUMN',@level2name=N'MAKE_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'処理区分' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'LJ_DIVIDEND', @level2type=N'COLUMN',@level2name=N'SHORI_KBN'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'銘柄コード' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'LJ_DIVIDEND', @level2type=N'COLUMN',@level2name=N'BRAND_CD'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'発表日' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'LJ_DIVIDEND', @level2type=N'COLUMN',@level2name=N'ANNU_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'権利落ち日' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'LJ_DIVIDEND', @level2type=N'COLUMN',@level2name=N'EX_RIGHTS_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'支払日' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'LJ_DIVIDEND', @level2type=N'COLUMN',@level2name=N'PAY_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'配当内容' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'LJ_DIVIDEND', @level2type=N'COLUMN',@level2name=N'DIV_TXT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'配当金' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'LJ_DIVIDEND', @level2type=N'COLUMN',@level2name=N'DIV_PRICE'
+Go
+
+IF OBJECT_ID(N'L_DIVIDEND', N'U') IS NOT NULL 
+DROP TABLE L_DIVIDEND
+GO 
+
+CREATE TABLE [dbo].[L_DIVIDEND]
+(
+    [UP_DT]                        [datetime],
+    [MAKE_DT]                      [datetime],
+    [SHORI_KBN]                    [nvarchar](5),
+    [BRAND_CD]                     [nvarchar](256) NOT NULL,
+    [ANNU_DT]                      [datetime] NOT NULL,
+    [EX_RIGHTS_DT]                 [datetime] NOT NULL,
+    [PAY_DT]                       [datetime] NOT NULL,
+    [DIV_TXT]                      [nvarchar](1024),
+    [DIV_PRICE]                    [float],
+    CONSTRAINT [PK_L_DIVIDEND] PRIMARY KEY CLUSTERED 
+(
+       BRAND_CD ASC, 
+       ANNU_DT ASC, 
+       EX_RIGHTS_DT ASC, 
+       PAY_DT ASC
+    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] 
+GO 
+
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'更新日時' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'L_DIVIDEND', @level2type=N'COLUMN',@level2name=N'UP_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'登録日時' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'L_DIVIDEND', @level2type=N'COLUMN',@level2name=N'MAKE_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'処理区分' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'L_DIVIDEND', @level2type=N'COLUMN',@level2name=N'SHORI_KBN'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'銘柄コード' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'L_DIVIDEND', @level2type=N'COLUMN',@level2name=N'BRAND_CD'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'発表日' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'L_DIVIDEND', @level2type=N'COLUMN',@level2name=N'ANNU_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'権利落ち日' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'L_DIVIDEND', @level2type=N'COLUMN',@level2name=N'EX_RIGHTS_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'支払日' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'L_DIVIDEND', @level2type=N'COLUMN',@level2name=N'PAY_DT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'配当内容' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'L_DIVIDEND', @level2type=N'COLUMN',@level2name=N'DIV_TXT'
+Go
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'配当金' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'L_DIVIDEND', @level2type=N'COLUMN',@level2name=N'DIV_PRICE'
+Go
+

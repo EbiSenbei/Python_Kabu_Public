@@ -1,19 +1,10 @@
-##　参考サイト
-# https://gammasoft.jp/blog/how-to-download-web-page-created-javascript/
-# クロームのバージョンが変わったら、下記のサイトよりドライバーをダウンロードする
-# https://chromedriver.chromium.org/downloads
+
 import datetime
 import os
 import pandas as pd
-import time
-import sqlite3
-import copy
 import requests
 from bs4 import BeautifulSoup
-from dateutil.relativedelta import relativedelta
 import urllib.request
-
-import yfinance as yf
 
 import warnings
 warnings.simplefilter('ignore')

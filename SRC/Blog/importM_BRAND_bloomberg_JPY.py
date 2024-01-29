@@ -42,8 +42,8 @@ if __name__ == '__main__':
     outputDf = pd.DataFrame(data=None, index=None, columns=None, dtype=None, copy=False)
     for idx,sr in inputDf.iterrows():
 
-        if idx > 20:
-            break
+        # if idx > 20:
+        #     break
 
         ticker_code = str(inputDf.loc[idx, "コード"])
         ticker_name = str(inputDf.loc[idx, "銘柄名"])
